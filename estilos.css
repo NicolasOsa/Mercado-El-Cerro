@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+
+.darkMode{
+    color: white;
+    background-color: black;
+}
+
+.darkMode .card{
+    color: black;
+}
+.darkMode .modal{
+    color: black;
+}

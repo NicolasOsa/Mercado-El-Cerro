@@ -1,0 +1,118 @@
+[
+    {
+        "id": 1,
+        "prod": "Leche",
+        "marca": "Sancor",
+        "precio": 300,
+        "imagen": "sancorLeche.jpg",
+        "categoria": "Lacteos"
+    },
+    {
+        "id": 2,
+        "prod": "Azucar",
+        "marca": "Chango A",
+        "precio": 450,
+        "imagen": "azucarChango.jpg",
+        "categoria": "Almacen"
+    },
+    {
+        "id": 3,
+        "prod": "Yogur",
+        "marca": "La Serenisima",
+        "precio": 250,
+        "imagen": "yogurLaSerenisima.jpg",
+        "categoria": "Lacteos"
+    },
+    {
+        "id": 4,
+        "prod": "Yerba",
+        "marca": "Playadito",
+        "precio": 500,
+        "imagen": "yerbaPlayadito.jpg",
+        "categoria": "Almacen"
+    },
+    {
+        "id": 5,
+        "prod": "Aceite",
+        "marca": "Cocinero",
+        "precio": 900,
+        "imagen": "aceiteCocinero.jpg",
+        "categoria": "Almacen"
+    },
+    {
+        "id": 6,
+        "prod": "Leche",
+        "marca": "La Serenisima",
+        "precio": 320,
+        "imagen": "lecheLaSerenisima.jpg",
+        "categoria": "Lacteos"
+    },
+    {
+        "id": 7,
+        "prod": "Azucar",
+        "marca": "Ledezma",
+        "precio": 500,
+        "imagen": "azucarLedezma.jpg",
+        "categoria": "Almacen"
+    },
+    {
+        "id": 8,
+        "prod": "Yogur",
+        "marca": "Sancor",
+        "precio": 350,
+        "imagen": "yogurSancor.jpg",
+        "categoria": "Lacteos"
+    },
+    {
+        "id": 9,
+        "prod": "Yerba",
+        "marca": "Taragui",
+        "precio": 700,
+        "imagen": "yerbaTaragui.jpg",
+        "categoria": "Almacen"
+    },
+    {
+        "id": 10,
+        "prod": "Aceite de Oliva",
+        "marca": "Nocete",
+        "precio": 1200,
+        "imagen": "aceiteNocete.jpg",
+        "categoria": "Almacen"
+    },
+    {
+        "id": 11,
+        "prod": "Coca-Cola",
+        "marca": "Coca-Cola",
+        "precio": 600,
+        "imagen":"coca.jpg" ,
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 12,
+        "prod": "Sprite",
+        "marca": "Sprite",
+        "precio": 550,
+        "imagen": "sprite.jpg",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 13,
+        "prod": "Suavizante",
+        "marca": "Vivere",
+        "precio": 2300,
+        "imagen": "vivere.jpg",
+        "categoria": "Limpieza"
+    },
+    {
+        "id": 14,
+        "prod": "Jabon Liquido",
+        "marca": "Skip",
+        "precio": 3200,
+        "imagen": "skip.jpg",
+        "categoria": "Limpieza"
+    }
+
+]
+
+
+
