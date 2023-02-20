@@ -81,6 +81,7 @@ function agregarAlCarrito(producto){
     Toastify({
         text: `Ha agregado el producto ${producto.prod} de la marca ${producto.marca}al carrito`,
         className: "info",
+        position: "center",
         timer: 2000,
         style: {
           background: "linear-gradient(to right, #00b09b, #96c93d)",
@@ -91,6 +92,7 @@ function agregarAlCarrito(producto){
         Toastify({
             text: `El producto ${producto.prod} de la marca ${producto.marca} ya esta en el carrito`,
             className: "info",
+            position: "center",
             timer: 2000,
             style: {
               background: "linear-gradient(to right, #00b09b, #96c93d)",
