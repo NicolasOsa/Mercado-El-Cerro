@@ -1,78 +1,131 @@
 
-
-// ---formulario validacion----------------
+// ---captura nodos validacion----------------
 let formValidacion = document.getElementById("formValidacion")
 let btnValidar = document.getElementById("btnValidar")
 
-//----evento validacion--------
+let inputNombre = document.getElementById("inputNombre")
+let inputApellido = document.getElementById("inputApellido")
+let inputEmail = document.getElementById("inputEmail")
+let inputClave = document.getElementById("inputClave")
+let inputCalle = document.getElementById("inputCalle") 
+let inputNum = document.getElementById("inputNum")
+let warnings = document.getElementById("warnings")
 
-btnValidar.addEventListener("click", () =>{
-   validarFormulario()
-})
+let entrarCtaBtn = document.getElementById("entrarCtaBtn")
+let emailAccesoInput = document.getElementById("emailAccesoInput")
+let claveAccesoInput = document.getElementById("claveAccesoInput")
+let usuarioEntrar = document.getElementById("usuarioEntrar")
+let formEntrarCta = document.getElementById("formEntrarCta")
+let warningAcceso = document.getElementById("warningAcceso")
 
-
-//-----inputs------------------
-
-
+//------creacion de usuario---------
+class Usuario{
+   constructor(id, nombre, apellido, email, clave, calle, numero){
+       this.id = id,
+       this.nombre = nombre,
+       this.apellido = apellido,
+       this.email = email,
+       this.clave = clave,
+       this.calle = calle,
+       this.numero = numero
+      }
+   } 
+   
+let usuarios = []
+   
 //----funcion validacion-----
 
-function validarFormulario(){
-    
-    let inputNombre = document.getElementById("inputNombre")
-    let inputApellido = document.getElementById("inputApellido")
-    let inputEmail = document.getElementById("inputEmail")
-    let inputClave = document.getElementById("inputClave")
-    let inputCalle = document.getElementById("inputCalle") 
-    let inputNum = document.getElementById("inputNum")
-    let warnings = document.getElementById("warnings")
 
-    warnings.innerHTML = ""
+function validarFormulario(){  
+   
+   const expresiones = {   
+      nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, 
+      apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+      email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+      clave: /^.{4,12}$/, 
+      calle: /^\d{0,4}[a-zA-ZÀ-ÿ\s]{1,40}$/,
+      numero: /^\d{1,7}$/ 
+   } 
+   warnings.innerHTML = ""
+   
+   const patronNombre = expresiones.nombre
+   resultado1 = patronNombre.test(inputNombre.value) 
+    resultado1 == false && (warnings.innerHTML += 'El nombre no es valido <br>')
 
-    const patronNombre =  /^[a-zA-ZÀ-ÿ\s]{1,40}$/
-    resultado1 = patronNombre.test(inputNombre.value) 
-     if(resultado1 == true){
-        console.log('El nombre es valido')
-     }else{warnings.innerHTML += 'El nombre no es valido <br>'}
 
-
-    const patronApellido = /^[a-zA-ZÀ-ÿ\s]{1,40}$/
+    const patronApellido = expresiones.apellido
     resultado2 = patronApellido.test(inputApellido.value) 
-     if(resultado2 == true){
-        console.log('El apellido es valido')
-     }else{warnings.innerHTML += 'El apellido no es valido <br>'}
+     resultado2 == false && (warnings.innerHTML += 'El apellido no es valido <br>')
 
 
-    const patronEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+    const patronEmail = expresiones.email
     resultado3 = patronEmail.test(inputEmail.value) 
-     if(resultado3 == true){
-        console.log('El email es valido')
-     }else{warnings.innerHTML += 'El e-mail no es valido <br>'}
+     resultado3 == false && (warnings.innerHTML += 'El e-mail no es valido <br>')
 
-    const patronClave = /^.{4,12}$/
+    const patronClave = expresiones.clave
     resultado4 = patronClave.test(inputClave.value) 
-      if(resultado4 == true){
-         console.log('La clave es valida')
-      }else{warnings.innerHTML += 'La clave no es valida <br>'}
-
+      resultado4 == false && (warnings.innerHTML += 'La clave no es valida <br>')
       
-     const patronCalle = /^\d{0,4}[a-zA-ZÀ-ÿ\s]{1,40}$/
+    const patronCalle = expresiones.calle
       resultado5 = patronCalle.test(inputCalle.value) 
-      if(resultado5 == true){
-          console.log('Direccion es valida')
-        }else{warnings.innerHTML += 'La direccion no es valida <br>'}
+      resultado5 == false && (warnings.innerHTML += 'La calle de ladireccion no es valida <br>')
 
-
-    const patronNum = /^\d{1,5}$/
+    const patronNum = expresiones.numero
         resultado6 = patronNum.test(inputNum.value) 
-        if(resultado6 == true){
-            console.log('Direccion es valida')
-          }else{warnings.innerHTML += 'La direccion no es valida <br>'}
-      } 
-        /* 
-    const expresiones = {
-        usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-        nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-        password: /^.{4,12}$/, // 4 a 12 digitos.
-        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        telefono: /^\d{7,14}$/ // 7 a 14 numeros.
-    } */
+        resultado6 == false && (warnings.innerHTML += 'El numero de la direccion no es valido <br>')
+       
+
+generarUsuario(usuarios)
+} 
+
+
+
+function generarUsuario(array){
+   
+   const nuevoUsuario = new Usuario(array.length+1, inputNombre.value, inputApellido.value, inputEmail.value, inputClave.value, inputCalle.value, inputNum.value)
+   
+   console.log(nuevoUsuario)
+   array.push(nuevoUsuario)
+   console.log(usuarios)
+   localStorage.setItem("usuarios", JSON.stringify(array))
+    
+        Swal.fire({
+        icon: 'success',
+        title: 'Se ha cargado su usuario',
+        text: `${nuevoUsuario.nombre} ${nuevoUsuario.apellido} Bienvenido a mercado El Cerro. Ya puede hacer su compra.`,
+      }) 
+   
+   formValidacion.reset()
+} 
+
+
+function entrarCuenta(){
+   
+   let usActual = JSON.parse(localStorage.getItem("usuarios"))
+   
+   let usuarioActual = usActual.find(usuario => {
+      return usuario.email == emailAccesoInput.value;
+   })
+   
+   if(usuarioActual == undefined) {(warningAcceso.innerHTML = 'El usuario no exite.')
+   }else{
+      console.log(usuarioActual)
+      let verificacion = usuarioActual.clave == claveAccesoInput.value
+      verificacion == true ? usuarioEntrar.innerHTML =`Usuario: ${usuarioActual.nombre} ${usuarioActual.apellido}` 
+      : (warningAcceso.innerHTML = 'Contraceña incorrecta!Escriba la contraceña nuevamente.')
+   }
+   
+   //formEntrarCta.reset()
+}
+
+
+
+//----evento validacion--------
+      
+btnValidar.addEventListener("click", () =>{
+    validarFormulario()
+})
+
+entrarCtaBtn.addEventListener("click", ()=>{
+   entrarCuenta()
+})

@@ -13,6 +13,7 @@ let modalBodyCarrito = document.getElementById("modalBodyCarrito")
 let formAgregarProd = document.getElementById("formAgregarProd")
 let totalCarrito = document.getElementById("totalCarrito")
 let btnFinalizarCompra = document.getElementById("btnFinalizarCompra")
+let warningCarrito = document.getElementById("warningCarrito")
 
 let btnAlmacen = document.getElementById("btnAlmacen")
 let btnLacteos = document.getElementById("btnLacteos")
@@ -22,7 +23,7 @@ let btnTodasCat = document.getElementById("btnTodasCat")
 
 
 
-//-----FUNCIONES DE EL MERCADITO NAVEGADOR--------------------
+//-----FUNCIONES DEL MERCADO NAVEGADOR--------------------
 
 function mostrarGondola(array){
     productos.innerHTML = ""
@@ -271,24 +272,34 @@ function calculoTotalCarrito(array){
 
 //--------------------FINALIZAR COMPRA---------------------
 
-function finalizarCompra(){
+function finalizarCompra(verificacion){
     console.log('funciona la funcion')
 
-    Swal.fire({
+    if(verificacion){
+        console.log('anda el if. puede comprar')
+        
+    }else{
+        console.log('anda el else')
+        warningCarrito.innerHTML = 'Debe entrar a su cuenta de usuario para finalizar la compra.'
+    }
+ 
+    /* Swal.fire({
         title: 'Esta seguro de finalizar la compra?',
         showDenyButton: true,        
         confirmButtonText: 'Comprar',
         denyButtonText: `No comprar`,
       }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+        
         if (result.isConfirmed) {
-          Swal.fire('Su compra esta confirmada!', '', 'success')
+            let valorCompra = calculoTotalCarrito(productosEnCarrito)
+            let usuarioCompra = entrarCuenta(usuarioActual)
+          Swal.fire(`Su compra esta confirmada!`,`El total es: $${valorCompra} ${usuarioCompra}`, 'success')
           productosEnCarrito = []
           localStorage.removeItem('carrito')
         } else if (result.isDenied) {
-          Swal.fire('Su compra aun no se confirmo.', '', 'info')
+          Swal.fire('Su compra aun no se confirmo.', 'Puede continuar su compra.', 'info')
         }
-      })
+      }) */
 
 }
 
@@ -323,7 +334,10 @@ botonCarrito.addEventListener("click", () =>{
 })
 
 btnFinalizarCompra.addEventListener("click", () =>{ 
-    finalizarCompra()
+    entrarCuenta();
+    let verificacion = localStorage.getItem("verificacion");
+    finalizarCompra(verificacion)
+
 })
 
 

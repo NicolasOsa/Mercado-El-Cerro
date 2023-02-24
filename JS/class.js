@@ -27,12 +27,11 @@ let gondola = []
 const cargarGondola = async () =>{
     const response = await fetch ("productos.json")
     const data = await response.json()
-    
+    console.log(data)
     for(let producto of data){
         let productoNuevo = new Producto(producto.id, producto.prod, producto.marca, producto.precio, producto.imagen, producto.categoria)
         gondola.push(productoNuevo)
-    }
-    console.log(gondola)
+    } 
 }
 
 
@@ -47,3 +46,4 @@ if(localStorage.getItem("gondola")){
 }else{   
     cargarGondola()
 }
+ 

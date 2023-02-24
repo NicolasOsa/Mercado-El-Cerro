@@ -59,16 +59,16 @@
         </div> 
      </nav>
 
-
+<!-- Botones primer fila -->
   
      <div class="container row m-3" >
-         <div class="col-8">
+         <div class="col-md-6">
             <h1>
               Mercado El Cerro
             </h1>
           </div >
         
-          <div class="container col">
+          <div class="container col-md-2">
               <div class="col">                
                   <button id="botonDarkMode" class="btn btn-dark">Dark</button>  
               </div>
@@ -76,12 +76,46 @@
                   <button id="botonLightMode" class="btn btn-light">Light</button>  
               </div>             
           </div>
-          <div class="col">
+          <div class="col-md-2">
             <div id="fecha" ></div>
             <div id="hora" ></div>
           </div>
+          <div class="col-md-2">
+            <div>
+              <h3 class="logIn" id="usuarioEntrar"></h3>
+            </div>
+            <button id="entrarUsuario" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#usuarioModal">Entrar a tu cuenta</button>
+          </div>
       </div>
        
+      <!-- BOTONES DE LAS CATEGORIAS -->
+      
+      <div class="container row m-3 justify-content-center">
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+    <input type="checkbox" class="btn-check" id="btnAlmacen" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btnAlmacen">Almacén</label>
+  
+    <input type="checkbox" class="btn-check" id="btnLacteos" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btnLacteos">Lacteos</label>
+  
+    <input type="checkbox" class="btn-check" id="btnBebidas" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btnBebidas">Bebidas</label>
+    
+    <input type="checkbox" class="btn-check" id="btnLimpieza" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btnLimpieza">Limpieza</label>
+    
+    <input type="checkbox" class="btn-check" id="btnTodasCat" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btnTodasCat">Todas las categorias</label>
+  </div>
+</div>   
+
+<!-- PRODUCTOS DEL MERCADO -->
+
+<div class="container bg-success m-3" >
+  <div id="respuesta"></div>      
+  <div id="productos" class="row"></div>
+</div>
+
 <!-- CARRUSEL CON LAS OFERTAS -->
 
 <div class="container" >
@@ -124,34 +158,6 @@
     </button>
   </div>
 </div>
-
-     <!-- BOTONES DE LAS CATEGORIAS -->
-
-<div class="container row m-3 justify-content-center">
-  <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-    <input type="checkbox" class="btn-check" id="btnAlmacen" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnAlmacen">Almacén</label>
-  
-    <input type="checkbox" class="btn-check" id="btnLacteos" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnLacteos">Lacteos</label>
-  
-    <input type="checkbox" class="btn-check" id="btnBebidas" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnBebidas">Bebidas</label>
-
-    <input type="checkbox" class="btn-check" id="btnLimpieza" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnLimpieza">Limpieza</label>
-
-    <input type="checkbox" class="btn-check" id="btnTodasCat" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnTodasCat">Todas las categorias</label>
-  </div>
-</div>   
-
-<!-- PRODUCTOS DEL MERCADO -->
- 
-    <div class="container bg-success" >
-      <div id="respuesta"></div>      
-      <div id="productos" class="row"></div>
-    </div>
 
 
 
@@ -221,6 +227,7 @@
         <p id="totalCarrito">    </p>
       </div>
       <div class="modal-footer">
+        <p class="warnings" id="warningCarrito"></p>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" id="btnFinalizarCompra">Finalizar compra</button>
       </div>
@@ -256,7 +263,7 @@
             <input type="email" class="form-control" id="inputEmail" placeholder="elcerromercado@gmail.com">
           </div>
           <div class="col-md-6">
-            <label for="inputClave" class="form-label">Clave</label>
+            <label for="inputClave" class="form-label">Contraseña</label>
             <input type="password" class="form-control" id="inputClave" placeholder="*******">
           </div>
           
@@ -278,6 +285,41 @@
     </div>
   </div>
 </div>
+
+<!-- modal formulario ACCESO USUARIO -->
+
+
+<div class="modal fade" id="usuarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="usuarioModalLabel">Acceso a tu cuenta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form id="formEntrarCta">
+          <div class="mb-3">
+            <label for="emailAcceso">Email:</label>
+            <input type="text" id="emailAccesoInput" name="emailAcceso">
+          </div>
+          <div class="mb-3">
+            <label for="claveAcceso">Contraseña:</label>
+            <input type="text" id="claveAccesoInput" name="claveAcceso">
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <p class="warnings" id="warningAcceso"></p>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" id="entrarCtaBtn" class="btn btn-success">Entrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 <!-- Script de Bootstrap -->
