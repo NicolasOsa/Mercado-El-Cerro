@@ -106,6 +106,7 @@ function agregarAlCarrito(producto){
 
 function cargarCarrito(array){
     modalBodyCarrito.innerHTML = ""
+    warningCarrito.innerHTML = ""
     array.forEach((productoCarrito) => {
         modalBodyCarrito.innerHTML +=`
             <div class="card mb-3" id = "productoCarrito${productoCarrito.id}" style="max-width: 540px;">
@@ -272,35 +273,37 @@ function calculoTotalCarrito(array){
 
 //--------------------FINALIZAR COMPRA---------------------
 
-function finalizarCompra(verificacion){
+function finalizarCompra(){
+    
     console.log('funciona la funcion')
-
-    if(verificacion){
-        console.log('anda el if. puede comprar')
+    let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActual"))
+    if(usuarioActivo !== null){
+        console.log('anda el if')
+        Swal.fire({
+            title: 'Esta seguro de finalizar la compra?',
+            showDenyButton: true,        
+            confirmButtonText: 'Comprar',
+            denyButtonText: `No comprar`,
+          }).then((result) => {
+            
+            if (result.isConfirmed) {
+                let valorCompra = calculoTotalCarrito(productosEnCarrito)
+                const DateTime = luxon.DateTime
+                const fechaEntrega = DateTime.now().plus({ days: 1 })
+                let fechaEnvio = fechaEntrega.toLocaleString(DateTime.DATE_FULL)
+                
+              Swal.fire(`${usuarioActivo.nombre} ${usuarioActivo.apellido} su compra esta confirmada!`,`El total es: $${valorCompra}. Se realizara el envio en la direccion ${usuarioActivo.calle} ${usuarioActivo.numero}. El dia ${fechaEnvio}, de 9 a 13 hs.`, 'success')
+              productosEnCarrito = []
+              localStorage.removeItem('carrito')
+            } else if (result.isDenied) {}
+          })         
         
     }else{
         console.log('anda el else')
         warningCarrito.innerHTML = 'Debe entrar a su cuenta de usuario para finalizar la compra.'
+       
     }
  
-    /* Swal.fire({
-        title: 'Esta seguro de finalizar la compra?',
-        showDenyButton: true,        
-        confirmButtonText: 'Comprar',
-        denyButtonText: `No comprar`,
-      }).then((result) => {
-        
-        if (result.isConfirmed) {
-            let valorCompra = calculoTotalCarrito(productosEnCarrito)
-            let usuarioCompra = entrarCuenta(usuarioActual)
-          Swal.fire(`Su compra esta confirmada!`,`El total es: $${valorCompra} ${usuarioCompra}`, 'success')
-          productosEnCarrito = []
-          localStorage.removeItem('carrito')
-        } else if (result.isDenied) {
-          Swal.fire('Su compra aun no se confirmo.', 'Puede continuar su compra.', 'info')
-        }
-      }) */
-
 }
 
 
@@ -334,9 +337,7 @@ botonCarrito.addEventListener("click", () =>{
 })
 
 btnFinalizarCompra.addEventListener("click", () =>{ 
-    entrarCuenta();
-    let verificacion = localStorage.getItem("verificacion");
-    finalizarCompra(verificacion)
+    finalizarCompra()
 
 })
 

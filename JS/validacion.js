@@ -100,25 +100,34 @@ function generarUsuario(array){
 
 
 function entrarCuenta(){
-   
+      
    let usActual = JSON.parse(localStorage.getItem("usuarios"))
    
    let usuarioActual = usActual.find(usuario => {
       return usuario.email == emailAccesoInput.value;
    })
-   
+
    if(usuarioActual == undefined) {(warningAcceso.innerHTML = 'El usuario no exite.')
    }else{
       console.log(usuarioActual)
       let verificacion = usuarioActual.clave == claveAccesoInput.value
-      verificacion == true ? usuarioEntrar.innerHTML =`Usuario: ${usuarioActual.nombre} ${usuarioActual.apellido}` 
+      verificacion == true ? (usuarioEntrar.innerHTML =`Usuario: ${usuarioActual.nombre} ${usuarioActual.apellido}`)
       : (warningAcceso.innerHTML = 'Contraceña incorrecta!Escriba la contraceña nuevamente.')
+
+      localStorage.setItem("usuarioActual", JSON.stringify(usuarioActual))
    }
    
    //formEntrarCta.reset()
 }
 
-
+function usuarioStorge(){
+   let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActual"))
+   if(usuarioActivo !== null){
+      console.log('funciona usuarioStorage')
+      usuarioEntrar.innerHTML =`Usuario: ${usuarioActivo.nombre} ${usuarioActivo.apellido}`
+   }
+}
+usuarioStorge()
 
 //----evento validacion--------
       
