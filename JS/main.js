@@ -14,6 +14,7 @@ let formAgregarProd = document.getElementById("formAgregarProd")
 let totalCarrito = document.getElementById("totalCarrito")
 let btnFinalizarCompra = document.getElementById("btnFinalizarCompra")
 let warningCarrito = document.getElementById("warningCarrito")
+let adminBoton = document.getElementById("adminBoton")
 
 let btnAlmacen = document.getElementById("btnAlmacen")
 let btnLacteos = document.getElementById("btnLacteos")
@@ -176,6 +177,7 @@ function cargarCarrito(array){
 
 //----------------CARGAR PROD A LA GONDOLA-----------------------
 
+
 function cargarProducto(array){
     
     let inputProd = document.getElementById("prodInput")
@@ -201,7 +203,20 @@ function cargarProducto(array){
       })
 } 
 
+//---------------BOTONES QUE SOLO TIENE EL ADMINISTRADOR----------------------------
 
+function usuarioAdmin(){
+    let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActual"))
+    if(usuarioActivo.nombre == "Administrador"){
+       console.log('funciona usuarioAdmin')
+       adminBoton.innerHTML =`
+            <button type="button" id="agregarProducto" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Agregar producto
+             </button>
+       `
+    }else{adminBoton.innerHTML = ""}
+ //usuarioAdmin()
+}
 //---------------BUSCAR PROD----------------------------
 
 function buscarProdMarca(buscado, array) {

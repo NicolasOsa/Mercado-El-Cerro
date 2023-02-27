@@ -1,22 +1,4 @@
 
-// ---captura nodos validacion----------------
-let formValidacion = document.getElementById("formValidacion")
-let btnValidar = document.getElementById("btnValidar")
-
-let inputNombre = document.getElementById("inputNombre")
-let inputApellido = document.getElementById("inputApellido")
-let inputEmail = document.getElementById("inputEmail")
-let inputClave = document.getElementById("inputClave")
-let inputCalle = document.getElementById("inputCalle") 
-let inputNum = document.getElementById("inputNum")
-let warnings = document.getElementById("warnings")
-
-let entrarCtaBtn = document.getElementById("entrarCtaBtn")
-let emailAccesoInput = document.getElementById("emailAccesoInput")
-let claveAccesoInput = document.getElementById("claveAccesoInput")
-let usuarioEntrar = document.getElementById("usuarioEntrar")
-let formEntrarCta = document.getElementById("formEntrarCta")
-let warningAcceso = document.getElementById("warningAcceso")
 
 //------creacion de usuario---------
 class Usuario{
@@ -33,6 +15,22 @@ class Usuario{
    
 let usuarios = []
    
+
+ 
+ function agregarUsuarioAdmin() {
+   let existeAdmin = usuarios.some(usuario => usuario.email === 'administrador@ejemplo.com');
+   if (!existeAdmin) {
+     const administrador = new Usuario(1, 'Administrador', 'El Cerro', 'administrador@gmail.com', '12345678', '9 deJulio', '234');
+     usuarios.push(administrador);
+     localStorage.setItem('usuarios', JSON.stringify(usuarios));
+   }
+ }
+
+ window.addEventListener('load', () => {
+   agregarUsuarioAdmin();
+ });
+
+
 //----funcion validacion-----
 
 
@@ -116,20 +114,22 @@ function entrarCuenta(){
 
       localStorage.setItem("usuarioActual", JSON.stringify(usuarioActual))
    }
-   
-   //formEntrarCta.reset()
+   usuarioAdmin()
+   formEntrarCta.reset()
+
 }
 
 function usuarioStorge(){
    let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActual"))
    if(usuarioActivo !== null){
-      console.log('funciona usuarioStorage')
       usuarioEntrar.innerHTML =`Usuario: ${usuarioActivo.nombre} ${usuarioActivo.apellido}`
    }
 }
 usuarioStorge()
 
 //----evento validacion--------
+
+
       
 btnValidar.addEventListener("click", () =>{
     validarFormulario()
@@ -138,3 +138,7 @@ btnValidar.addEventListener("click", () =>{
 entrarCtaBtn.addEventListener("click", ()=>{
    entrarCuenta()
 })
+
+
+
+
